@@ -9,8 +9,10 @@ Both quality and poor_query_percentage should be rounded to 2 decimal places.
 Return the result table in any order.
 
 CODE IS HERE=
-SELECT QUERY_NAME ROUND(AVG(RATING/POSITION),2)AS QUALITY
-             ROUND(AVG(IF (RATING<3 THEN 1,0)*100),2)AS POOR_QUERY_PERCENTAGE
-                      FROM QUERY
-                              WHERE QUERY_NAME IS NOT NULL
-                                          GROUP BY QUERY_NAME
+select query_name , round(avg (rating /position),2) as quality,
+round(avg(case when rating < 3 then 1 else 0 end) * 100 ,2) 
+as poor_query_percentage
+from queries 
+where query_name is not null
+group by query_name ;
+
