@@ -1,0 +1,15 @@
+Pivot the Occupation column in OCCUPATIONS so that each Name is sorted alphabetically and displayed underneath
+its corresponding Occupation. The output column headers should be Doctor, Professor, Singer, and Actor, respectively.
+
+Note: Print NULL when there are no more names corresponding to an occupation
+code=
+
+
+SELECT Doctor, Professor, Singer,Actor
+FROM (
+    SELECT  * ,
+        row_number( ) OVER (PARTITION BY OCCUPATION ORDER BY NAME) AS rn
+    FROM OCCUPATIONS) A
+PIVOT (
+    MAX(NAME) FOR OCCUPATION IN ([Doctor], [Professor], [Singer], [Actor])
+) as pivot_tab
