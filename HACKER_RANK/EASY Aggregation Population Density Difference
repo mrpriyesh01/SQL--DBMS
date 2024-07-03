@@ -1,0 +1,4 @@
+QUESTION=Query the difference between the maximum and minimum populations in CITY.
+CODE=
+SELECT Max(POPULATION)-Min(POPULATION) FROM CITY
+
