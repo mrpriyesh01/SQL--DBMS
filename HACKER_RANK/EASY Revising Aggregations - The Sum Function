@@ -1,0 +1,8 @@
+EASY QUESTION
+
+Query the total population of all cities in CITY where District is California.
+
+
+CODE= 
+select sum(population ) from city
+ where district = 'California'
