@@ -1,0 +1,4 @@
+QUESTION=find top 3 employee in each department earning the max salary
+select * from(
+           select *, row_number() over(partition by dept_name order by salary desc) as rowno from employee) as row_employee
+where rowno<4;
