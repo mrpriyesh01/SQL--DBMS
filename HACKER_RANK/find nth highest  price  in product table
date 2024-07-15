@@ -1,0 +1,5 @@
+code=
+select price,
+nth_value(price,3)  over w as nth_second_highestprice
+from product
+window w as(order by price desc range between unbounded preceding and unbounded following);
