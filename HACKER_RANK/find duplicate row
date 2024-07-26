@@ -1,0 +1,4 @@
+select *,count(*) as duplicate
+from employee
+group  by emails
+having count(*)>1;
