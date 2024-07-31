@@ -1,0 +1,8 @@
+Fetch the first 2 employees from each department to join the company.
+
+
+select * from(
+	select e.*,
+row_number() over(partition by dept_name order by emp_id ) as rnum
+from employee e) s
+where s.rnum<3;
