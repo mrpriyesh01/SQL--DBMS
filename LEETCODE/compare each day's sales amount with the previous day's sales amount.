@@ -1,0 +1,7 @@
+SELECT
+    sales_id,
+    sales_date,
+    amount,
+    LAG(amount, 1, 0) OVER (ORDER BY sales_date) AS previous_day_amount
+FROM
+    sales;
