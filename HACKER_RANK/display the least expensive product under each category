@@ -1,0 +1,3 @@
+question= Write query to display the least expensive product under each category (corresponding to each record)
+code=select *, last_value(product_name) over(partition by product_category order  by price asc )as lessexpensive
+from product
