@@ -1,0 +1,16 @@
+SELECT DISTINCT
+    region,
+    FIRST_VALUE(sale_date) OVER (PARTITION BY region ORDER BY sale_date ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS first_highest_sale_date,
+    LAST_VALUE(sale_date) OVER (PARTITION BY region ORDER BY sale_date ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS last_highest_sale_date
+FROM
+    (SELECT
+         region,
+         sale_date,
+         sale_amount,
+         RANK() OVER (PARTITION BY region ORDER BY sale_amount DESC) AS sale_rank
+     FROM
+         employee_sales) AS RankedSales
+WHERE
+    sale_rank = 1
+ORDER BY
+    region;
