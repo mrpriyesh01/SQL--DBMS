@@ -1,0 +1,15 @@
+QUESTION=   Write a query to segregate all the expensive phones, mid range phones and the cheaper phones.
+select x.product_name, 
+
+
+
+
+code=
+case when x.buckets = 1 then 'Expensive Phones'
+     when x.buckets = 2 then 'Mid Range Phones'
+     when x.buckets = 3 then 'Cheaper Phones' END as Phone_Category
+from (
+    select *,
+    ntile(3) over (order by price desc) as buckets
+    from product
+    where product_category = 'Phone') x;
