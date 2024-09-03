@@ -1,0 +1,8 @@
+"Calculate the running total of sales for each day,  the current day, up to 3 days before, and up to 2 days after."
+code=
+SELECT 
+    Day, 
+    Sales, 
+    SUM(Sales) OVER (ORDER BY Day ROWS BETWEEN 3 PRECEDING AND 2 FOLLOWING) AS RunningTotal
+FROM 
+    Sales;
