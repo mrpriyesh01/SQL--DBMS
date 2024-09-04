@@ -1,0 +1,11 @@
+qustion= find employee who earn more than average salry of all employee using cte
+
+code=
+
+WITH AvgSalaryCTE AS (
+    SELECT AVG(salary) AS average_salary
+    FROM employees
+)
+SELECT employee_id, employee_name, salary
+FROM employees
+WHERE salary > (SELECT average_salary FROM AvgSalaryCTE);
