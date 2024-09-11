@@ -1,0 +1,21 @@
+--Count the number of Movies vs TV Shows
+
+
+code=
+SELECT
+    COUNT(CASE WHEN type = 'Movie' THEN 1 END) AS total_movies,
+    COUNT(CASE WHEN type = 'TV Show' THEN 1 END) AS total_shows
+FROM netflix;
+
+
+Explanation:
+COUNT(CASE WHEN type = 'Movie' THEN 1 END) AS total_movies:
+Counts rows where type is 'Movie'.
+Aliased as total_movies.
+
+COUNT(CASE WHEN type = 'TV Show' THEN 1 END) AS total_shows:
+Counts rows where type is 'TV Show'.
+Aliased as total_shows.
+
+FROM netflix;:
+Specifies the netflix table..
