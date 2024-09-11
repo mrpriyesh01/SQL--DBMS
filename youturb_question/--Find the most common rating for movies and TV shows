@@ -1,0 +1,32 @@
+select type ,rating from 
+(select type, rating, count(*),
+	rank() over (partition by type order by count(*) desc) as ranking
+from netflix
+group by type, rating)as t1
+where ranking=1
+
+
+
+Explanation:
+SELECT type, rating:
+Purpose: Retrieve the type and rating from the results.
+FROM (:
+
+Purpose: Start a subquery to calculate counts and rankings.
+SELECT type, rating, COUNT(*) AS count_rating,:
+Purpose: Select type, rating, and count the number of occurrences for each combination. Rename the count as count_rating.
+
+RANK() OVER (PARTITION BY type ORDER BY COUNT(*) DESC) AS ranking:
+Purpose: Rank ratings within each type based on their count_rating. The most common rating gets a rank of 1.
+
+netflix:
+Purpose: Specify the source table (netflix).
+
+BY type, rating:
+Purpose: Group the data by type and rating to calculate counts for each group.
+
+) AS t1:
+Purpose: End of the subquery. Alias the result as t1.
+
+WHERE ranking = 1;:
+Purpose: Filter results to include only those with the top rank (i.e., the most common ratings).
